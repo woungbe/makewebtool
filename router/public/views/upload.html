@@ -1,0 +1,50 @@
+{{define "upload"}}
+<html>
+<head>
+   <title>파일 업로드 테스트</title>
+</head>
+<body>
+<div class="container">
+   <h1>파일 업로드 테스트</h1>
+   <form id="uploadForm">
+        <input type="file" name="file" />
+        <button type="button" id="uploadBtn">Save</button>
+   </form>
+
+   <div id="showsql"></div>
+
+
+</div>
+</body>
+</html>
+
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+
+    $(function(){
+        $('#uploadBtn').on('click', function(){
+            uploadFile();
+        });
+    });
+
+    function uploadFile(){
+        var form = $('#uploadForm')[0];
+        var formData = new FormData(form);
+
+        $.ajax({
+            url : '{{ .url}}',
+            type : 'POST',
+            data : formData,
+            contentType : false,
+            processData : false        
+        }).done(function(data){
+            console.log(data);
+            $("#showsql").html('그래서 그랬어 ..!! 내 공부 !!');
+        });
+    }
+
+
+</script>
+
+
+{{end}}
